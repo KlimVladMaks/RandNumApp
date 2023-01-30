@@ -130,8 +130,13 @@ class RandNumFragment: Fragment() {
     private fun updateRandNum() {
 
         // Переводим числа начала и конца диапозона в числовой формат
-        val startNum = range[0].toInt()
-        val endNum = range[1].toInt()
+        var startNum = range[0].toInt()
+        var endNum = range[1].toInt()
+
+        // Если начальное число заданного диапазона больше конечного числа, то меняем эти числа местами
+        if (startNum > endNum) {
+            startNum = endNum.also { endNum = startNum }
+        }
 
         // Генерируем новое случайное число из заданного диапазона
         val newRandNum = (startNum..endNum).random()
