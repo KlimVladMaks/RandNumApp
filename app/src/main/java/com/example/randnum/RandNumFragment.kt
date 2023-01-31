@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
 // Класс фрагмента для экрана получения случайного числа
 class RandNumFragment: Fragment() {
@@ -26,17 +27,9 @@ class RandNumFragment: Fragment() {
     // Создаём переменную для хранения кнопки генерации числа
     private lateinit var generationButton: Button
 
-    // Создаём переменную для хранения списка с началом и концом диапазона
-    // range[0] - начало диапазона, range[1] - конец диапазона
-    // (Числа хранятся в строковом формате)
-    private lateinit var range: MutableList<String>
-
-    // Переопределяем функцию, вызываемую при создании фрагмента
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Наполняем список с началом и концом диапазона начальными значениями
-        range = mutableListOf("-10", "10")
+    // Создаём экземпляр RandNumViewModel, подключая его к данному фрагменту
+    private val randNumViewModel: RandNumViewModel by lazy {
+        ViewModelProvider(this)[RandNumViewModel::class.java]
     }
 
     // Переопределяем функцию, вызываемую при заполнении представления макета
@@ -70,8 +63,13 @@ class RandNumFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Обновляем случайное число, чтобы придать ему начальное значение
-        updateRandNum()
+        // Если текущего случайного числа ещё не задано, то обновляем его, чтобы задать начальное значение
+        // Иначе помещаем в randNumTextView.text текущее случайное число
+        if (randNumViewModel.currentRandNum == null) {
+            updateRandNum()
+        } else {
+            randNumTextView.text = randNumViewModel.currentRandNum.toString()
+        }
     }
 
     // Переопределяем функцию, вызываемую при запуске фрагмента
@@ -87,8 +85,14 @@ class RandNumFragment: Fragment() {
             // Функция, обрабатывающая текст в поле ввода во время его изменения
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                // Записываем введённое число в начало списка
-                range[0] = s.toString()
+                // Если введённая строка равна null или не может быть конвертированна в число,
+                // то записываем в randNumViewModel.range[0] значение по умолчанию.
+                // Иначе записываем в randNumViewModel.range[0] введённую строку
+                if (s == null || !isInteger(s.toString())) {
+                    randNumViewModel.range[0] = randNumViewModel.startRangeDefault
+                } else {
+                    randNumViewModel.range[0] = s.toString()
+                }
             }
 
             // Функция, обрабатывающая текст в поле ввода после его изменения
@@ -104,8 +108,14 @@ class RandNumFragment: Fragment() {
             // Функция, обрабатывающая текст в поле ввода во время его изменения
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                // Записываем введённое число в конец списка
-                range[1] = s.toString()
+                // Если введённая строка равна null или не может быть конвертированна в число,
+                // то записываем в randNumViewModel.range[1] значение по умолчанию.
+                // Иначе записываем в randNumViewModel.range[1] введённую строку
+                if (s == null || !isInteger(s.toString())) {
+                    randNumViewModel.range[1] = randNumViewModel.endRangeDefault
+                } else {
+                    randNumViewModel.range[1] = s.toString()
+                }
             }
 
             // Функция, обрабатывающая текст в поле ввода после его изменения
@@ -130,8 +140,8 @@ class RandNumFragment: Fragment() {
     private fun updateRandNum() {
 
         // Переводим числа начала и конца диапозона в числовой формат
-        var startNum = range[0].toInt()
-        var endNum = range[1].toInt()
+        var startNum = randNumViewModel.range[0].toInt()
+        var endNum = randNumViewModel.range[1].toInt()
 
         // Если начальное число заданного диапазона больше конечного числа, то меняем эти числа местами
         if (startNum > endNum) {
@@ -141,8 +151,21 @@ class RandNumFragment: Fragment() {
         // Генерируем новое случайное число из заданного диапазона
         val newRandNum = (startNum..endNum).random()
 
+        // Обновляем текущее случайное число в randNumViewModel
+        randNumViewModel.currentRandNum = newRandNum
+
         // Помещаем сгенерированное число в соответствующее текстовое поле
         randNumTextView.text = newRandNum.toString()
+    }
+
+    // Функция, определяющая, может ли переданная строка быть конвертированна в число
+    private fun isInteger(str: String): Boolean {
+        return try {
+            str.toInt()
+            true
+        } catch (e: NumberFormatException) {
+            false
+        }
     }
 
     // Блок кода, доступный без создания экземпляра фрагмента

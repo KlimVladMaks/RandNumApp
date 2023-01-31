@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- ConstraintLayout, выступающий контейнером для других элементов макета -->
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +12,7 @@
         android:id="@+id/generation_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="25dp"
         android:text="@string/generation_header"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -28,34 +27,33 @@
         android:id="@+id/left_bracket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="180dp"
         android:text="@string/left_bracket"
         android:textColor="@color/black"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/rand_num"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generation_header"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_header" />
 
     <!-- Правая скобка -->
     <TextView
         android:id="@+id/right_bracket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="180dp"
         android:text="@string/right_bracket"
         android:textColor="@color/black"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/rand_num"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generation_header"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_header" />
 
     <!-- Поле для ввода числа начала диапозона -->
     <EditText
         android:id="@+id/start_range"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:autofillHints="@string/start_range"
         android:hint="@string/start_range"
         android:inputType="numberSigned"
@@ -64,17 +62,17 @@
         android:textAlignment="center"
         android:textColorHint="#78909C"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/rand_num"
         app:layout_constraintEnd_toStartOf="@+id/semicolon"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/left_bracket"
-        app:layout_constraintTop_toBottomOf="@+id/generation_header"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_header" />
 
     <!-- Поле для ввода числа конца диапозона -->
     <EditText
         android:id="@+id/end_range"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:autofillHints="@string/end_range"
         android:hint="@string/end_range"
         android:inputType="numberSigned"
@@ -83,32 +81,31 @@
         android:textAlignment="center"
         android:textColorHint="#78909C"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/rand_num"
         app:layout_constraintEnd_toStartOf="@+id/right_bracket"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/semicolon"
-        app:layout_constraintTop_toBottomOf="@+id/generation_header"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_header" />
 
     <!-- Разделительная точка с запятой -->
     <TextView
         android:id="@+id/semicolon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/semicolon"
         android:textColor="@color/black"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/rand_num"
         app:layout_constraintEnd_toStartOf="@+id/right_bracket"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0."
         app:layout_constraintStart_toEndOf="@+id/left_bracket"
-        app:layout_constraintTop_toBottomOf="@+id/generation_header"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_header" />
 
     <!-- Поле со сгенерированным случайным числом -->
     <TextView
         android:id="@+id/rand_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="180dp"
         android:text=""
         android:textColor="#000000"
         android:textSize="60sp"
@@ -116,6 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/semicolon"
         tools:text="125" />
 
     <!-- Кнопка для генерации случайного числа -->
@@ -123,11 +121,12 @@
         android:id="@+id/generation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/generation_button"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

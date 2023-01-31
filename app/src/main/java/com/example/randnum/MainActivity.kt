@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         // Подключаем соответсвующий XML-макет к активити
         setContentView(R.layout.activity_main)
 
-        // Отключаем для приложения возможность перехода в горизонтальный режим
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        // Скрываем верхний заголовок (title bar) приложения
+        supportActionBar?.hide()
 
         // Получаем фрагмент, который в настоящее время заполняет макет активити
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
