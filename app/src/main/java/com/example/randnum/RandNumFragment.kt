@@ -79,9 +79,6 @@ class RandNumFragment: Fragment() {
         // Создаём слушателя для поля ввода числа начала диапазона
         val startRangeWatcher = object: TextWatcher {
 
-            // Создаём переменную, показывающую, является ли ввод корректным
-            private var isCorrectInput = true
-
             // Функция, обрабатывающая текст в поле ввода до его изменения
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
