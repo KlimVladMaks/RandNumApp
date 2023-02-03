@@ -79,18 +79,26 @@ class RandNumFragment: Fragment() {
         // Создаём слушателя для поля ввода числа начала диапазона
         val startRangeWatcher = object: TextWatcher {
 
+            // Создаём переменную, показывающую, является ли ввод корректным
+            private var isCorrectInput = true
+
             // Функция, обрабатывающая текст в поле ввода до его изменения
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             // Функция, обрабатывающая текст в поле ввода во время его изменения
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                // Если введённая строка равна null или не может быть конвертированна в число,
-                // то записываем в randNumViewModel.range[0] значение по умолчанию.
-                // Иначе записываем в randNumViewModel.range[0] введённую строку
+                // Если введённая строка равна null или не может быть конвертированна в число
                 if (s == null || !isInteger(s.toString())) {
+
+                    // Записываем в randNumViewModel.range[0] значение по умолчанию
                     randNumViewModel.range[0] = randNumViewModel.startRangeDefault
-                } else {
+                }
+
+                // Иначе
+                else {
+
+                    // Записываем в randNumViewModel.range[0] введённую строку
                     randNumViewModel.range[0] = s.toString()
                 }
             }
@@ -139,6 +147,9 @@ class RandNumFragment: Fragment() {
     // Функция для обновляения текущего случайного числа новым случайным числом из заданного диапазона
     private fun updateRandNum() {
 
+        // Приводим содержание полей EditText к корректному состоянию
+        prepareEditText()
+
         // Переводим числа начала и конца диапозона в числовой формат
         var startNum = randNumViewModel.range[0].toInt()
         var endNum = randNumViewModel.range[1].toInt()
@@ -156,6 +167,14 @@ class RandNumFragment: Fragment() {
 
         // Помещаем сгенерированное число в соответствующее текстовое поле
         randNumTextView.text = newRandNum.toString()
+    }
+
+    // Функция для приведения содержания EditText к корректному состоянию
+    private fun prepareEditText() {
+
+        // Если в каком-либо поле EditText записан лишь "-", то очищаем данное поле EditText
+        if (startRangeEditText.text.toString() == "-") startRangeEditText.text.clear()
+        if (endRangeEditText.text.toString() == "-") endRangeEditText.text.clear()
     }
 
     // Функция, определяющая, может ли переданная строка быть конвертированна в число
