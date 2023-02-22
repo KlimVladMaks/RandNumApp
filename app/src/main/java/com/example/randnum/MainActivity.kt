@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         if (currentFragment == null) {
 
             // Создаём новый экземпляр фрагмента RandNumFragment
-            val fragment = RandNumFragment.getInstance()
+            val fragment = SomeRandNumFragment.getInstance()
 
             // Загружаем созданный выше фрагмент во fragment_container данной активити
             supportFragmentManager

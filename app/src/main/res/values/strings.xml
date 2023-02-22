@@ -7,6 +7,9 @@
     <string name="left_bracket">[</string>
     <string name="right_bracket">]</string>
     <string name="semicolon">;</string>
+    <string name="some_generation_header_1">Сгенерировать</string>
+    <string name="some_generation_header_2">случайных чисел из диапазона:</string>
+    <string name="quantity">5</string>
 </resources>
 
 
