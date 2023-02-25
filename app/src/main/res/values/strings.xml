@@ -10,6 +10,9 @@
     <string name="some_generation_header_1">Сгенерировать</string>
     <string name="some_generation_header_2">случайных чисел из диапазона:</string>
     <string name="quantity">5</string>
+    <string name="selection_header">Выбор режима работы</string>
+    <string name="single_generate">Сгенерировать одно случайное число</string>
+    <string name="some_generate">Сгенерировать несколько случайных чисел</string>
 </resources>
 
 

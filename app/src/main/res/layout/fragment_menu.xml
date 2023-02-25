@@ -8,5 +8,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Заголовок меню -->
+    <TextView
+        android:id="@+id/selection_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/selection_header"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="38dp" />
+
+    <!-- Разделительная линия -->
+    <View
+        android:id="@+id/separation_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/selection_header"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <!-- Кнопка для генерации одного случайного числа -->
+    <Button
+        android:id="@+id/single_generate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/single_generate"
+        android:textSize="16sp"
+        android:lineSpacingExtra="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separation_line" />
+
+    <!-- Кнопка для генерации нескольких случайных чисел -->
+    <Button
+        android:id="@+id/some_generate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/some_generate"
+        android:textSize="16sp"
+        android:lineSpacingExtra="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/single_generate_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
